@@ -10,6 +10,7 @@ pipeline {
     }
     stages {
         stage('Run A Command') {
+            slackSend channel: 'jenkins-pipeline-notification-test', message: 'Run A Command Job Started'
             steps {
                 sh '''
                     ls
@@ -20,6 +21,7 @@ pipeline {
             }
         }
         stage('Environment Variables') {
+            slackSend channel: 'jenkins-pipeline-notification-test', message: 'Environment Variables Job Started'
             environment {
                 username = 'nagesh'
             }
@@ -29,6 +31,7 @@ pipeline {
             }
         }
         stage('Parameters') {
+            slackSend channel: 'jenkins-pipeline-notification-test', message: 'Parameters Job Started'
             steps {
                 echo 'Deploy on Test'
                 sh 'echo ${Person}'
@@ -37,6 +40,7 @@ pipeline {
             }
         }
         stage('Continue?') {
+            slackSend channel: 'jenkins-pipeline-notification-test', message: 'Continue Job Started'
             input {
                 message "Should we continue?"
                 ok "Yes we should"
@@ -47,6 +51,7 @@ pipeline {
             }
         }
         stage('Deploy on Prod') {
+            slackSend channel: 'jenkins-pipeline-notification-test', message: 'Deploy on Prod Job Started'
             steps {
                 echo 'Deploy on Prod'
             }
@@ -58,9 +63,11 @@ pipeline {
         }
         failure {
             echo "Failure!"
+            slackSend channel: 'jenkins-pipeline-notification-test', message: 'Pipeline execution Failed!'
         }
         success {
             echo "Success!"
+            slackSend channel: 'jenkins-pipeline-notification-test', message: 'Pipeline executed Successfully'
         }
     }
     
