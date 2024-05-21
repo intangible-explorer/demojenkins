@@ -10,7 +10,6 @@ pipeline {
     }
     stages {
         stage('Run A Command') {
-            slackSend channel: 'jenkins-pipeline-notification-test', message: 'Run A Command Job Started'
             steps {
                 sh '''
                     ls
@@ -18,29 +17,29 @@ pipeline {
                     pwd
                     cal 2024
                 '''
+                slackSend channel: 'jenkins-pipeline-notification-test', message: 'Run A Command Job Started'
             }
         }
         stage('Environment Variables') {
-            slackSend channel: 'jenkins-pipeline-notification-test', message: 'Environment Variables Job Started'
             environment {
                 username = 'nagesh'
             }
             steps {
                 sh 'echo ${name}'
                 sh 'echo ${username}'
+                slackSend channel: 'jenkins-pipeline-notification-test', message: 'Environment Variables Job Started'
             }
         }
         stage('Parameters') {
-            slackSend channel: 'jenkins-pipeline-notification-test', message: 'Parameters Job Started'
             steps {
                 echo 'Deploy on Test'
                 sh 'echo ${Person}'
                 sh 'echo ${isMale}'
                 sh 'echo ${City}'
+                slackSend channel: 'jenkins-pipeline-notification-test', message: 'Parameters Job Started'
             }
         }
         stage('Continue?') {
-            slackSend channel: 'jenkins-pipeline-notification-test', message: 'Continue Job Started'
             input {
                 message "Should we continue?"
                 ok "Yes we should"
@@ -48,12 +47,13 @@ pipeline {
             }
             steps {
                 echo 'Manual intervension success!'
+                slackSend channel: 'jenkins-pipeline-notification-test', message: 'Continue Job Started'
             }
         }
         stage('Deploy on Prod') {
-            slackSend channel: 'jenkins-pipeline-notification-test', message: 'Deploy on Prod Job Started'
             steps {
                 echo 'Deploy on Prod'
+                slackSend channel: 'jenkins-pipeline-notification-test', message: 'Deploy on Prod Job Started'
             }
         }
     }
